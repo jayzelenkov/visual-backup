@@ -1,0 +1,461 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2AC7E785166DF27E0056E4DC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC7E784166DF27E0056E4DC /* Cocoa.framework */; };
+		2AC7E78F166DF27E0056E4DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2AC7E78D166DF27E0056E4DC /* InfoPlist.strings */; };
+		2AC7E791166DF27E0056E4DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7E790166DF27E0056E4DC /* main.m */; };
+		2AC7E795166DF27E0056E4DC /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2AC7E793166DF27E0056E4DC /* Credits.rtf */; };
+		2AC7E798166DF27E0056E4DC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7E797166DF27E0056E4DC /* AppDelegate.m */; };
+		2AC7E79B166DF27E0056E4DC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AC7E799166DF27E0056E4DC /* MainMenu.xib */; };
+		2AC7E7A3166DF27E0056E4DC /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC7E7A2166DF27E0056E4DC /* SenTestingKit.framework */; };
+		2AC7E7A4166DF27E0056E4DC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC7E784166DF27E0056E4DC /* Cocoa.framework */; };
+		2AC7E7AC166DF27E0056E4DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2AC7E7AA166DF27E0056E4DC /* InfoPlist.strings */; };
+		2AC7E7AF166DF27E0056E4DC /* VisualBackupTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7E7AE166DF27E0056E4DC /* VisualBackupTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2AC7E7A5166DF27E0056E4DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2AC7E777166DF27E0056E4DC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2AC7E77F166DF27E0056E4DC;
+			remoteInfo = VisualBackup;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2AC7E780166DF27E0056E4DC /* VisualBackup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VisualBackup.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2AC7E784166DF27E0056E4DC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		2AC7E787166DF27E0056E4DC /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		2AC7E788166DF27E0056E4DC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		2AC7E789166DF27E0056E4DC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2AC7E78C166DF27E0056E4DC /* VisualBackup-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VisualBackup-Info.plist"; sourceTree = "<group>"; };
+		2AC7E78E166DF27E0056E4DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2AC7E790166DF27E0056E4DC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2AC7E792166DF27E0056E4DC /* VisualBackup-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VisualBackup-Prefix.pch"; sourceTree = "<group>"; };
+		2AC7E794166DF27E0056E4DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		2AC7E796166DF27E0056E4DC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		2AC7E797166DF27E0056E4DC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		2AC7E79A166DF27E0056E4DC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		2AC7E7A1166DF27E0056E4DC /* VisualBackupTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VisualBackupTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2AC7E7A2166DF27E0056E4DC /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		2AC7E7A9166DF27E0056E4DC /* VisualBackupTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VisualBackupTests-Info.plist"; sourceTree = "<group>"; };
+		2AC7E7AB166DF27E0056E4DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2AC7E7AD166DF27E0056E4DC /* VisualBackupTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VisualBackupTests.h; sourceTree = "<group>"; };
+		2AC7E7AE166DF27E0056E4DC /* VisualBackupTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VisualBackupTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2AC7E77D166DF27E0056E4DC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2AC7E785166DF27E0056E4DC /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2AC7E79D166DF27E0056E4DC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2AC7E7A3166DF27E0056E4DC /* SenTestingKit.framework in Frameworks */,
+				2AC7E7A4166DF27E0056E4DC /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2AC7E775166DF27E0056E4DC = {
+			isa = PBXGroup;
+			children = (
+				2AC7E78A166DF27E0056E4DC /* VisualBackup */,
+				2AC7E7A7166DF27E0056E4DC /* VisualBackupTests */,
+				2AC7E783166DF27E0056E4DC /* Frameworks */,
+				2AC7E781166DF27E0056E4DC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2AC7E781166DF27E0056E4DC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2AC7E780166DF27E0056E4DC /* VisualBackup.app */,
+				2AC7E7A1166DF27E0056E4DC /* VisualBackupTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2AC7E783166DF27E0056E4DC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2AC7E784166DF27E0056E4DC /* Cocoa.framework */,
+				2AC7E7A2166DF27E0056E4DC /* SenTestingKit.framework */,
+				2AC7E786166DF27E0056E4DC /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2AC7E786166DF27E0056E4DC /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2AC7E787166DF27E0056E4DC /* AppKit.framework */,
+				2AC7E788166DF27E0056E4DC /* CoreData.framework */,
+				2AC7E789166DF27E0056E4DC /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		2AC7E78A166DF27E0056E4DC /* VisualBackup */ = {
+			isa = PBXGroup;
+			children = (
+				2AC7E796166DF27E0056E4DC /* AppDelegate.h */,
+				2AC7E797166DF27E0056E4DC /* AppDelegate.m */,
+				2AC7E799166DF27E0056E4DC /* MainMenu.xib */,
+				2AC7E78B166DF27E0056E4DC /* Supporting Files */,
+			);
+			path = VisualBackup;
+			sourceTree = "<group>";
+		};
+		2AC7E78B166DF27E0056E4DC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2AC7E78C166DF27E0056E4DC /* VisualBackup-Info.plist */,
+				2AC7E78D166DF27E0056E4DC /* InfoPlist.strings */,
+				2AC7E790166DF27E0056E4DC /* main.m */,
+				2AC7E792166DF27E0056E4DC /* VisualBackup-Prefix.pch */,
+				2AC7E793166DF27E0056E4DC /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2AC7E7A7166DF27E0056E4DC /* VisualBackupTests */ = {
+			isa = PBXGroup;
+			children = (
+				2AC7E7AD166DF27E0056E4DC /* VisualBackupTests.h */,
+				2AC7E7AE166DF27E0056E4DC /* VisualBackupTests.m */,
+				2AC7E7A8166DF27E0056E4DC /* Supporting Files */,
+			);
+			path = VisualBackupTests;
+			sourceTree = "<group>";
+		};
+		2AC7E7A8166DF27E0056E4DC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2AC7E7A9166DF27E0056E4DC /* VisualBackupTests-Info.plist */,
+				2AC7E7AA166DF27E0056E4DC /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2AC7E77F166DF27E0056E4DC /* VisualBackup */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2AC7E7B2166DF27E0056E4DC /* Build configuration list for PBXNativeTarget "VisualBackup" */;
+			buildPhases = (
+				2AC7E77C166DF27E0056E4DC /* Sources */,
+				2AC7E77D166DF27E0056E4DC /* Frameworks */,
+				2AC7E77E166DF27E0056E4DC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VisualBackup;
+			productName = VisualBackup;
+			productReference = 2AC7E780166DF27E0056E4DC /* VisualBackup.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2AC7E7A0166DF27E0056E4DC /* VisualBackupTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2AC7E7B5166DF27E0056E4DC /* Build configuration list for PBXNativeTarget "VisualBackupTests" */;
+			buildPhases = (
+				2AC7E79C166DF27E0056E4DC /* Sources */,
+				2AC7E79D166DF27E0056E4DC /* Frameworks */,
+				2AC7E79E166DF27E0056E4DC /* Resources */,
+				2AC7E79F166DF27E0056E4DC /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2AC7E7A6166DF27E0056E4DC /* PBXTargetDependency */,
+			);
+			name = VisualBackupTests;
+			productName = VisualBackupTests;
+			productReference = 2AC7E7A1166DF27E0056E4DC /* VisualBackupTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2AC7E777166DF27E0056E4DC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Jevgeni Zelenkov";
+			};
+			buildConfigurationList = 2AC7E77A166DF27E0056E4DC /* Build configuration list for PBXProject "VisualBackup" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 2AC7E775166DF27E0056E4DC;
+			productRefGroup = 2AC7E781166DF27E0056E4DC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2AC7E77F166DF27E0056E4DC /* VisualBackup */,
+				2AC7E7A0166DF27E0056E4DC /* VisualBackupTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2AC7E77E166DF27E0056E4DC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2AC7E78F166DF27E0056E4DC /* InfoPlist.strings in Resources */,
+				2AC7E795166DF27E0056E4DC /* Credits.rtf in Resources */,
+				2AC7E79B166DF27E0056E4DC /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2AC7E79E166DF27E0056E4DC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2AC7E7AC166DF27E0056E4DC /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2AC7E79F166DF27E0056E4DC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2AC7E77C166DF27E0056E4DC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2AC7E791166DF27E0056E4DC /* main.m in Sources */,
+				2AC7E798166DF27E0056E4DC /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2AC7E79C166DF27E0056E4DC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2AC7E7AF166DF27E0056E4DC /* VisualBackupTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2AC7E7A6166DF27E0056E4DC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2AC7E77F166DF27E0056E4DC /* VisualBackup */;
+			targetProxy = 2AC7E7A5166DF27E0056E4DC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2AC7E78D166DF27E0056E4DC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2AC7E78E166DF27E0056E4DC /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		2AC7E793166DF27E0056E4DC /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2AC7E794166DF27E0056E4DC /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		2AC7E799166DF27E0056E4DC /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2AC7E79A166DF27E0056E4DC /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		2AC7E7AA166DF27E0056E4DC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2AC7E7AB166DF27E0056E4DC /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2AC7E7B0166DF27E0056E4DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		2AC7E7B1166DF27E0056E4DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		2AC7E7B3166DF27E0056E4DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VisualBackup/VisualBackup-Prefix.pch";
+				INFOPLIST_FILE = "VisualBackup/VisualBackup-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		2AC7E7B4166DF27E0056E4DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VisualBackup/VisualBackup-Prefix.pch";
+				INFOPLIST_FILE = "VisualBackup/VisualBackup-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		2AC7E7B6166DF27E0056E4DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/VisualBackup.app/Contents/MacOS/VisualBackup";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VisualBackup/VisualBackup-Prefix.pch";
+				INFOPLIST_FILE = "VisualBackupTests/VisualBackupTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		2AC7E7B7166DF27E0056E4DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/VisualBackup.app/Contents/MacOS/VisualBackup";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VisualBackup/VisualBackup-Prefix.pch";
+				INFOPLIST_FILE = "VisualBackupTests/VisualBackupTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2AC7E77A166DF27E0056E4DC /* Build configuration list for PBXProject "VisualBackup" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2AC7E7B0166DF27E0056E4DC /* Debug */,
+				2AC7E7B1166DF27E0056E4DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2AC7E7B2166DF27E0056E4DC /* Build configuration list for PBXNativeTarget "VisualBackup" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2AC7E7B3166DF27E0056E4DC /* Debug */,
+				2AC7E7B4166DF27E0056E4DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		2AC7E7B5166DF27E0056E4DC /* Build configuration list for PBXNativeTarget "VisualBackupTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2AC7E7B6166DF27E0056E4DC /* Debug */,
+				2AC7E7B7166DF27E0056E4DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2AC7E777166DF27E0056E4DC /* Project object */;
+}
