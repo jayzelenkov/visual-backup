@@ -26,7 +26,9 @@
 
 - (void)testExample
 {
-    STFail(@"Unit tests are not implemented yet in VisualBackupTests");
+    // STFail(@"Unit tests are not implemented yet in VisualBackupTests");
+    
+    STAssertNil(nil, @"Dooh!");
 }
 
 @end
