@@ -12,8 +12,12 @@
 @interface ImageBrowserItem : NSObject
 {
     NSString *_path;
+    NSDate *_createdAt;
+    NSArray *_runningApps;
 }
 
 - (void)setPath:(NSString *)path;
+- (void)setCreatedAt:(NSDate *)createdAt;
+- (void)setRunningApps:(NSArray *)runningApps;
 
 @end

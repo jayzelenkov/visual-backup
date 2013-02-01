@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2A65BF531688A961001A5CFD /* ImageObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A65BF521688A961001A5CFD /* ImageObject.m */; };
 		2A65BF5C1688AC2E001A5CFD /* ImageBrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A65BF5A1688AC2E001A5CFD /* ImageBrowserController.m */; };
 		2AB0116816B9C2C200B5952C /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AB0116716B9C2C200B5952C /* Quartz.framework */; };
 		2AB0116B16B9C71500B5952C /* ImageBrowserItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB0116A16B9C71500B5952C /* ImageBrowserItem.m */; };
+		2AB0116D16BB1E6C00B5952C /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AB0116C16BB1E6C00B5952C /* ApplicationServices.framework */; };
+		2AB0116F16BB1E7100B5952C /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AB0116E16BB1E7100B5952C /* IOKit.framework */; };
+		2AB0117116BB2D0500B5952C /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AB0117016BB2D0500B5952C /* ImageIO.framework */; };
+		2AB0117316BB2D1500B5952C /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AB0117216BB2D1500B5952C /* CoreServices.framework */; };
 		2AC7E785166DF27E0056E4DC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC7E784166DF27E0056E4DC /* Cocoa.framework */; };
 		2AC7E78F166DF27E0056E4DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2AC7E78D166DF27E0056E4DC /* InfoPlist.strings */; };
 		2AC7E791166DF27E0056E4DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7E790166DF27E0056E4DC /* main.m */; };
@@ -34,13 +37,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2A65BF511688A961001A5CFD /* ImageObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageObject.h; sourceTree = "<group>"; };
-		2A65BF521688A961001A5CFD /* ImageObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageObject.m; sourceTree = "<group>"; };
 		2A65BF591688AC2E001A5CFD /* ImageBrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageBrowserController.h; sourceTree = "<group>"; };
 		2A65BF5A1688AC2E001A5CFD /* ImageBrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageBrowserController.m; sourceTree = "<group>"; };
 		2AB0116716B9C2C200B5952C /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		2AB0116916B9C71500B5952C /* ImageBrowserItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageBrowserItem.h; path = ../ImageBrowserItem.h; sourceTree = "<group>"; };
 		2AB0116A16B9C71500B5952C /* ImageBrowserItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageBrowserItem.m; path = ../ImageBrowserItem.m; sourceTree = "<group>"; };
+		2AB0116C16BB1E6C00B5952C /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
+		2AB0116E16BB1E7100B5952C /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		2AB0117016BB2D0500B5952C /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		2AB0117216BB2D1500B5952C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		2AC7E780166DF27E0056E4DC /* VisualBackup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VisualBackup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AC7E784166DF27E0056E4DC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		2AC7E787166DF27E0056E4DC /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -67,6 +72,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AB0117316BB2D1500B5952C /* CoreServices.framework in Frameworks */,
+				2AB0117116BB2D0500B5952C /* ImageIO.framework in Frameworks */,
+				2AB0116F16BB1E7100B5952C /* IOKit.framework in Frameworks */,
+				2AB0116D16BB1E6C00B5952C /* ApplicationServices.framework in Frameworks */,
 				2AB0116816B9C2C200B5952C /* Quartz.framework in Frameworks */,
 				2AC7E785166DF27E0056E4DC /* Cocoa.framework in Frameworks */,
 			);
@@ -106,6 +115,8 @@
 		2AC7E783166DF27E0056E4DC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2AB0116E16BB1E7100B5952C /* IOKit.framework */,
+				2AB0116C16BB1E6C00B5952C /* ApplicationServices.framework */,
 				2AB0116716B9C2C200B5952C /* Quartz.framework */,
 				2AC7E784166DF27E0056E4DC /* Cocoa.framework */,
 				2AC7E7A2166DF27E0056E4DC /* SenTestingKit.framework */,
@@ -117,6 +128,8 @@
 		2AC7E786166DF27E0056E4DC /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2AB0117216BB2D1500B5952C /* CoreServices.framework */,
+				2AB0117016BB2D0500B5952C /* ImageIO.framework */,
 				2AC7E787166DF27E0056E4DC /* AppKit.framework */,
 				2AC7E788166DF27E0056E4DC /* CoreData.framework */,
 				2AC7E789166DF27E0056E4DC /* Foundation.framework */,
@@ -130,8 +143,6 @@
 				2AC7E796166DF27E0056E4DC /* AppDelegate.h */,
 				2AC7E797166DF27E0056E4DC /* AppDelegate.m */,
 				2AC7E799166DF27E0056E4DC /* MainMenu.xib */,
-				2A65BF511688A961001A5CFD /* ImageObject.h */,
-				2A65BF521688A961001A5CFD /* ImageObject.m */,
 				2A65BF591688AC2E001A5CFD /* ImageBrowserController.h */,
 				2A65BF5A1688AC2E001A5CFD /* ImageBrowserController.m */,
 				2AB0116916B9C71500B5952C /* ImageBrowserItem.h */,
@@ -282,7 +293,6 @@
 			files = (
 				2AC7E791166DF27E0056E4DC /* main.m in Sources */,
 				2AC7E798166DF27E0056E4DC /* AppDelegate.m in Sources */,
-				2A65BF531688A961001A5CFD /* ImageObject.m in Sources */,
 				2A65BF5C1688AC2E001A5CFD /* ImageBrowserController.m in Sources */,
 				2AB0116B16B9C71500B5952C /* ImageBrowserItem.m in Sources */,
 			);

@@ -35,4 +35,18 @@
     }
 }
 
+- (void)setCreatedAt:(NSDate *)createdAt
+{
+    _createdAt = createdAt;
+}
+
+- (void)setRunningApps:(NSArray *)runningApps
+{
+    if(_runningApps != nil) {
+        _runningApps = nil;
+    }
+    
+    _runningApps = [NSArray arrayWithArray:runningApps];
+}
+
 @end

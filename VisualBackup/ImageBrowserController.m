@@ -48,7 +48,7 @@
 
 - (IBAction)addImageButtonClicked:(id)sender
 {
-    NSString *picsDir = [NSHomeDirectory() stringByAppendingPathComponent:  @"Pictures"];
+    NSString *picsDir = [NSHomeDirectory() stringByAppendingPathComponent:  @"Pictures/VisualBackup-Test"];
     NSArray *filepaths = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:picsDir error:nil];
     NSMutableArray *images = [NSMutableArray arrayWithCapacity: 0];
 
@@ -97,13 +97,14 @@
     [_imageBrowser reloadData];
 }
 
-- (void)addAnImageWithPath:(NSString *)path
+- (void)addAnImageWithPath:(NSString *)path andCreationDate:(NSDate *)createdAt
 {
     ImageBrowserItem *p;
-    
+
 	/* add a path to our temporary array */
     p = [[ImageBrowserItem alloc] init];
     [p setPath:path];
+    [p setCreatedAt:createdAt];
 
     [_importedImages addObject:p];
 }
@@ -112,22 +113,106 @@
 - (void)addImagesWithPaths:(NSArray *)urls
 {
     NSArray *imageTypes = [NSImage imageTypes];
+    NSString *resType;
+    NSDate *createdAt;
+
     NSInteger i, n;
 
     n = [urls count];
     for ( i= 0; i < n; i++)
     {
         NSURL *url = [urls objectAtIndex:i];
-        
-        NSString *resType;
         [url getResourceValue:&resType forKey:NSURLTypeIdentifierKey error:nil];
         if([imageTypes containsObject:resType]) {
-            [self addAnImageWithPath:[url path]];
+            [url getResourceValue:&createdAt forKey:NSURLCreationDateKey error:nil];
+            [self addAnImageWithPath:[url path] andCreationDate:createdAt];
         }
     }
     
 	/* update the datasource in the main thread */
     [self performSelectorOnMainThread:@selector(updateDatasource) withObject:nil waitUntilDone:YES];
 }
+
+
+- (IBAction)screensaverButtonClicked:(id)sender
+{
+    
+    [self interrogateHardware];
+
+    if(displays == nil)
+    {
+        NSLog(@"DisplayID pointer is nil!\n");
+        return;
+    }
+
+    CGImageRef screenshot = CGDisplayCreateImage(displays[0]);
+    
+    if(screenshot == nil)
+    {
+        NSLog(@"no screenshot! Shit!");
+    }
+    
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd-HHmmss"];
+    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+    NSLog(@"%@",dateString);
+
+    NSString *picsDir = [NSHomeDirectory() stringByAppendingPathComponent:  @"Pictures/VisualBackup-Test"];
+    NSString *fullPath = [NSString stringWithFormat:@"%@/vbackup-%@.png", picsDir, dateString];
+    CGImageWriteToFile(screenshot, fullPath);
+
+    [self addImageButtonClicked:sender];
+}
+
+-(void) interrogateHardware
+{
+    CGError				err = CGDisplayNoErr;
+	CGDisplayCount		dspCount = 0;
+    
+    /* How many active displays do we have? */
+    err = CGGetActiveDisplayList(0, NULL, &dspCount);
+    
+	/* If we are getting an error here then their won't be much to display. */
+    if(err != CGDisplayNoErr)
+    {
+        return;
+    }
+
+	/* Maybe this isn't the first time though this function. */
+	if(displays != nil)
+    {
+		free(displays);
+    }
+
+	/* Allocate enough memory to hold all the display IDs we have. */
+    displays = calloc((size_t)dspCount, sizeof(CGDirectDisplayID));
+    
+	// Get the list of active displays
+    err = CGGetActiveDisplayList(dspCount,
+                                 displays,
+                                 &dspCount);
+	
+	/* More error-checking here. */
+    if(err != CGDisplayNoErr)
+    {
+        NSLog(@"Could not get active display list (%d)\n", err);
+        return;
+    }
+}
+
+void CGImageWriteToFile(CGImageRef image, NSString *path) {
+    CFURLRef url = (__bridge CFURLRef)[NSURL fileURLWithPath:path];
+
+    CGImageDestinationRef dest = CGImageDestinationCreateWithURL(url, kUTTypePNG, 1, nil);
+    
+    CGImageDestinationAddImage(dest, image, NULL);
+    
+    if (!CGImageDestinationFinalize(dest)) {
+        NSLog(@"Failed to write image to %@", path);
+    }
+    
+    CFRelease(dest);
+}
+
 
 @end
