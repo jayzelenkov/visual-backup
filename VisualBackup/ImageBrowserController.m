@@ -155,7 +155,6 @@
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd-HHmmss"];
     NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
-    NSLog(@"%@",dateString);
 
     NSString *picsDir = [NSHomeDirectory() stringByAppendingPathComponent:  @"Pictures/VisualBackup-Test"];
     NSString *fullPath = [NSString stringWithFormat:@"%@/vbackup-%@.png", picsDir, dateString];
