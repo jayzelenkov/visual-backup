@@ -136,22 +136,8 @@
 
 - (IBAction)screensaverButtonClicked:(id)sender
 {
-    
-    [self interrogateHardware];
+    CGImageRef screenshot = CGWindowListCreateImage(CGRectInfinite, kCGWindowListOptionOnScreenOnly, kCGNullWindowID, kCGWindowImageDefault);
 
-    if(displays == nil)
-    {
-        NSLog(@"DisplayID pointer is nil!\n");
-        return;
-    }
-
-    CGImageRef screenshot = CGDisplayCreateImage(displays[0]);
-    
-    if(screenshot == nil)
-    {
-        NSLog(@"no screenshot! Shit!");
-    }
-    
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd-HHmmss"];
     NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
@@ -161,43 +147,10 @@
     CGImageWriteToFile(screenshot, fullPath);
 
     [self addImageButtonClicked:sender];
+    CGImageRelease(screenshot);
+
 }
 
--(void) interrogateHardware
-{
-    CGError				err = CGDisplayNoErr;
-	CGDisplayCount		dspCount = 0;
-    
-    /* How many active displays do we have? */
-    err = CGGetActiveDisplayList(0, NULL, &dspCount);
-    
-	/* If we are getting an error here then their won't be much to display. */
-    if(err != CGDisplayNoErr)
-    {
-        return;
-    }
-
-	/* Maybe this isn't the first time though this function. */
-	if(displays != nil)
-    {
-		free(displays);
-    }
-
-	/* Allocate enough memory to hold all the display IDs we have. */
-    displays = calloc((size_t)dspCount, sizeof(CGDirectDisplayID));
-    
-	// Get the list of active displays
-    err = CGGetActiveDisplayList(dspCount,
-                                 displays,
-                                 &dspCount);
-	
-	/* More error-checking here. */
-    if(err != CGDisplayNoErr)
-    {
-        NSLog(@"Could not get active display list (%d)\n", err);
-        return;
-    }
-}
 
 void CGImageWriteToFile(CGImageRef image, NSString *path) {
     CFURLRef url = (__bridge CFURLRef)[NSURL fileURLWithPath:path];

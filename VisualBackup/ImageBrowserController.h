@@ -15,13 +15,9 @@
 
     NSMutableArray *_images;
     NSMutableArray *_importedImages;
-
-    CGDirectDisplayID *displays;
 }
 
 - (IBAction)addImageButtonClicked:(id)sender;
 - (IBAction)screensaverButtonClicked:(id)sender;
-
--(void) interrogateHardware;
 
 @end
