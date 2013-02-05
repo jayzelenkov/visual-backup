@@ -42,6 +42,15 @@
     [_imageBrowser setAnimates:YES];
     [_imageBrowser setDraggingDestinationDelegate:self];
     
+    _runningApps = [NSMutableDictionary dictionaryWithCapacity:0];
+    
+    NSString *picsDir = [NSHomeDirectory() stringByAppendingPathComponent:  @"Pictures/VisualBackup-Test"];
+    NSString *infoPath = [NSString stringWithFormat:@"%@/vbackup-data.txt", picsDir];
+    BOOL isFileExists = [[NSFileManager defaultManager] fileExistsAtPath:infoPath];
+    if(isFileExists) {
+        _runningApps = [NSKeyedUnarchiver unarchiveObjectWithFile:infoPath];
+    }
+
     // load images on load
     [self addImageButtonClicked:nil];
 }
@@ -50,26 +59,25 @@
 {
     NSString *picsDir = [NSHomeDirectory() stringByAppendingPathComponent:  @"Pictures/VisualBackup-Test"];
     NSArray *filepaths = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:picsDir error:nil];
-    NSMutableArray *images = [NSMutableArray arrayWithCapacity: 0];
-
-    NSInteger i, n;
-    n = [filepaths count];
+    NSMutableArray *images = [NSMutableArray array];
 
     [_images removeAllObjects];
 
-    for ( i= 0; i < n; i++)
+    for (id each in filepaths)
     {
-        NSString *fullPath = [NSString stringWithFormat:@"%@/%@", picsDir, [filepaths objectAtIndex:i]];
+        NSString *fullPath = [NSString stringWithFormat:@"%@/%@", picsDir, (NSString *)each];
         NSURL *url = [NSURL fileURLWithPath:fullPath];
         if(url != nil)
         {
             [images addObject:url];
         }
     }
+    
+    NSString *infoPath = [NSString stringWithFormat:@"%@/vbackup-data.txt", picsDir];
+    _runningApps = [NSKeyedUnarchiver unarchiveObjectWithFile:infoPath];
 
     /* launch import in an independent thread */
     [NSThread detachNewThreadSelector:@selector(addImagesWithPaths:) toTarget:self withObject:images];
-
 }
 
 
@@ -95,9 +103,22 @@
     
     //-- reload the image browser and set needs display
     [_imageBrowser reloadData];
+    [_imageBrowser removeAllToolTips];
+    for (int i=0; i<[_images count]; i++) {
+        NSRect rect = [_imageBrowser itemFrameAtIndex:i];
+        ImageBrowserItem *itemObj = [_images objectAtIndex:i];
+        [_imageBrowser addToolTipRect:rect owner:self userData:(__bridge void *)(itemObj)];
+    }
 }
 
-- (void)addAnImageWithPath:(NSString *)path andCreationDate:(NSDate *)createdAt
+- (NSString*)view:(NSView *)view stringForToolTip:(NSToolTipTag)tag point:(NSPoint)point userData:(void *)data {
+    ImageBrowserItem *itemObj = (__bridge ImageBrowserItem *)data;
+    
+    NSString *appsList = [[[itemObj getRunningApps] valueForKey:@"description"] componentsJoinedByString:@"\n"];
+    return appsList;
+}
+
+- (void)addAnImageWithPath:(NSString *)path creationDate:(NSDate *)createdAt andRunningApps:(NSArray *)apps
 {
     ImageBrowserItem *p;
 
@@ -105,6 +126,7 @@
     p = [[ImageBrowserItem alloc] init];
     [p setPath:path];
     [p setCreatedAt:createdAt];
+    [p setRunningApps:apps];
 
     [_importedImages addObject:p];
 }
@@ -116,16 +138,15 @@
     NSString *resType;
     NSDate *createdAt;
 
-    NSInteger i, n;
-
-    n = [urls count];
-    for ( i= 0; i < n; i++)
+    for (id each in urls)
     {
-        NSURL *url = [urls objectAtIndex:i];
+        NSURL *url = each;
         [url getResourceValue:&resType forKey:NSURLTypeIdentifierKey error:nil];
         if([imageTypes containsObject:resType]) {
             [url getResourceValue:&createdAt forKey:NSURLCreationDateKey error:nil];
-            [self addAnImageWithPath:[url path] andCreationDate:createdAt];
+            
+            NSArray *apps = [_runningApps objectForKey:[url path]];
+            [self addAnImageWithPath:[url path] creationDate:createdAt andRunningApps:apps];
         }
     }
     
@@ -133,6 +154,9 @@
     [self performSelectorOnMainThread:@selector(updateDatasource) withObject:nil waitUntilDone:YES];
 }
 
+typedef struct {
+    __unsafe_unretained NSMutableArray* outputArray;
+} ArrayApplierData;
 
 - (IBAction)screensaverButtonClicked:(id)sender
 {
@@ -143,12 +167,51 @@
     NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
 
     NSString *picsDir = [NSHomeDirectory() stringByAppendingPathComponent:  @"Pictures/VisualBackup-Test"];
-    NSString *fullPath = [NSString stringWithFormat:@"%@/vbackup-%@.png", picsDir, dateString];
-    CGImageWriteToFile(screenshot, fullPath);
+    NSString *imgPath = [NSString stringWithFormat:@"%@/vbackup-%@.png", picsDir, dateString];
+    CGImageWriteToFile(screenshot, imgPath);
+    
+    CFArrayRef windowsList = CGWindowListCopyWindowInfo(kCGWindowListOptionOnScreenOnly, kCGNullWindowID);
+    NSMutableArray * prunedWindowList = [NSMutableArray array];
+	ArrayApplierData data = {prunedWindowList};
+    
+    CFArrayApplyFunction(windowsList, CFRangeMake(0, CFArrayGetCount(windowsList)), &extractActiveProgramNames, &data);
+
+    if (_runningApps == nil)
+        _runningApps = [NSMutableDictionary dictionaryWithCapacity:0];
+
+    [_runningApps setObject:prunedWindowList forKey:imgPath];
+
+    NSString *infoPath = [NSString stringWithFormat:@"%@/vbackup-data.txt", picsDir];
+    [NSKeyedArchiver archiveRootObject:_runningApps toFile:infoPath];
+    
+	CFRelease(windowsList);
 
     [self addImageButtonClicked:sender];
     CGImageRelease(screenshot);
+}
 
+void extractActiveProgramNames(const void *inputDictionary, void *context);
+void extractActiveProgramNames(const void *inputDictionary, void *context)
+{
+    NSDictionary *entry = (__bridge NSDictionary*)inputDictionary;
+	ArrayApplierData *data = (ArrayApplierData*)context;
+
+    int sharingState = [[entry objectForKey:(id)kCGWindowSharingState] intValue];
+    int level = [[entry objectForKey:(id)kCGWindowLayer] intValue];
+
+	if((sharingState != kCGWindowSharingNone) && (level == 0))
+    {
+		// Grab the application name, but since it's optional we need to check before we can use it.
+		NSString *applicationName = [entry objectForKey:(id)kCGWindowOwnerName];
+
+		if(applicationName != NULL)
+		{
+            if([data->outputArray containsObject:applicationName] == NO)
+            {
+                [data->outputArray addObject:applicationName];
+            }
+		}
+	}
 }
 
 

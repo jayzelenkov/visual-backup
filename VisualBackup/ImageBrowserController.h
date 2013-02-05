@@ -15,6 +15,7 @@
 
     NSMutableArray *_images;
     NSMutableArray *_importedImages;
+    NSMutableDictionary *_runningApps;
 }
 
 - (IBAction)addImageButtonClicked:(id)sender;

@@ -17,7 +17,10 @@
 }
 
 - (void)setPath:(NSString *)path;
+- (NSString *)getPath;
+
 - (void)setCreatedAt:(NSDate *)createdAt;
 - (void)setRunningApps:(NSArray *)runningApps;
+- (NSArray *)getRunningApps;
 
 @end

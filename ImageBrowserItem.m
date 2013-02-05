@@ -35,6 +35,11 @@
     }
 }
 
+- (NSString *)getPath
+{
+    return _path;
+}
+
 - (void)setCreatedAt:(NSDate *)createdAt
 {
     _createdAt = createdAt;
@@ -47,6 +52,11 @@
     }
     
     _runningApps = [NSArray arrayWithArray:runningApps];
+}
+
+- (NSArray *)getRunningApps
+{
+    return _runningApps;
 }
 
 @end
