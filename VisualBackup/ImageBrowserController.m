@@ -8,6 +8,7 @@
 
 #import "ImageBrowserController.h"
 #import "ImageBrowserItem.h"
+#import <ApplicationServices/ApplicationServices.h>
 
 @implementation ImageBrowserController
 
@@ -21,11 +22,17 @@
     return self;
 }
 
-- (void)windowDidLoad
+- (void)windowDidBecomeKey:(NSNotification *)notification
 {
-    [super windowDidLoad];
-    
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+    ProcessSerialNumber psn = { 0, kCurrentProcess };
+    TransformProcessType(&psn, kProcessTransformToForegroundApplication);
+    SetFrontProcess(&psn);
+}
+
+- (void)windowWillClose:(NSNotification *)notification
+{
+    ProcessSerialNumber psn = { 0, kCurrentProcess };
+    TransformProcessType(&psn, kProcessTransformToUIElementApplication);
 }
 
 - (void)awakeFromNib

@@ -9,7 +9,7 @@
 #import <Quartz/Quartz.h>
 #import <Cocoa/Cocoa.h>
 
-@interface ImageBrowserController : NSWindowController
+@interface ImageBrowserController : NSWindowController <NSWindowDelegate>
 {
     IBOutlet IKImageBrowserView *_imageBrowser;
 

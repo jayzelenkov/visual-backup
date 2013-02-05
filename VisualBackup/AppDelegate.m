@@ -12,7 +12,24 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
+}
+
+- (void) awakeFromNib
+{
+    self.statusBar = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+    
+    self.statusBar.title = @"VBackup";
+    
+    // you can also set an image
+    //self.statusBar.image =
+
+    self.statusBar.menu = self.statusMenu;
+    self.statusBar.highlightMode = YES;
+}
+
+-(IBAction)showWindow:(id)sender {
+    if(! [_window isVisible] )
+        [_window makeKeyAndOrderFront:sender];
 }
 
 @end
