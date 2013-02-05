@@ -53,6 +53,8 @@
 
     // load images on load
     [self addImageButtonClicked:nil];
+
+    _screenshotsTaker = [NSTimer scheduledTimerWithTimeInterval:10.0f target:self selector:@selector(screensaverButtonClicked:) userInfo:self repeats:YES];
 }
 
 - (IBAction)addImageButtonClicked:(id)sender
