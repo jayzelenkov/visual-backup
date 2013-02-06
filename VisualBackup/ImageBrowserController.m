@@ -15,7 +15,7 @@
 - (id)initWithWindow:(NSWindow *)window {
     self = [super initWithWindow:window];
     if (self) {
-        // Initialization code here.
+        picsDir = [NSHomeDirectory() stringByAppendingPathComponent:  @"Pictures/VisualBackup-Test"];
     }
     return self;
 }
@@ -26,9 +26,6 @@
 }
 
 NSString *kInfoFileName = @"vbackup-data.txt";
-- (NSString *) getPicsDirPath {
-    return [NSHomeDirectory() stringByAppendingPathComponent:  @"Pictures/VisualBackup-Test"];
-}
 
 - (void)awakeFromNib {
     _images = [[NSMutableArray alloc] init];
@@ -44,7 +41,7 @@ NSString *kInfoFileName = @"vbackup-data.txt";
 
 - (void)loadRunningAppsInfoData {
     _runningApps = [NSMutableDictionary dictionaryWithCapacity:0];
-    NSString *infoPath = [NSString stringWithFormat:@"%@/%@", [self getPicsDirPath], kInfoFileName];
+    NSString *infoPath = [NSString stringWithFormat:@"%@/%@", picsDir, kInfoFileName];
     BOOL isFileExists = [[NSFileManager defaultManager] fileExistsAtPath:infoPath];
     if(isFileExists) {
         _runningApps = [NSKeyedUnarchiver unarchiveObjectWithFile:infoPath];
@@ -52,7 +49,6 @@ NSString *kInfoFileName = @"vbackup-data.txt";
 }
 
 - (void)reloadScreenshotsFromDefaultStore {
-    NSString *picsDir = [self getPicsDirPath];
     NSArray *filepaths = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:picsDir error:nil];
     NSMutableArray *images = [NSMutableArray array];
 
@@ -144,7 +140,6 @@ typedef struct {
     [dateFormatter setDateFormat:@"yyyy-MM-dd-HHmmss"];
     NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
 
-    NSString *picsDir = [self getPicsDirPath];
     NSString *imgPath = [NSString stringWithFormat:@"%@/vbackup-%@.png", picsDir, dateString];
     CGImageWriteToFile(screenshot, imgPath);
 

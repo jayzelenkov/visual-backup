@@ -13,6 +13,8 @@
 {
     IBOutlet IKImageBrowserView *_imageBrowser;
 
+    NSString *picsDir;
+    
     NSMutableArray *_images;
     NSMutableArray *_importedImages;
     NSMutableDictionary *_runningApps;
