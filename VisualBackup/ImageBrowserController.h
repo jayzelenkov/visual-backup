@@ -19,7 +19,6 @@
     NSTimer *_screenshotsTaker;
 }
 
-- (IBAction)addImageButtonClicked:(id)sender;
 - (IBAction)screensaverButtonClicked:(id)sender;
 
 @end

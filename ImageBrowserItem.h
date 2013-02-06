@@ -10,17 +10,9 @@
 #import <Foundation/Foundation.h>
 
 @interface ImageBrowserItem : NSObject
-{
-    NSString *_path;
-    NSDate *_createdAt;
-    NSArray *_runningApps;
-}
 
-- (void)setPath:(NSString *)path;
-- (NSString *)getPath;
-
-- (void)setCreatedAt:(NSDate *)createdAt;
-- (void)setRunningApps:(NSArray *)runningApps;
-- (NSArray *)getRunningApps;
+@property NSString *path;
+@property NSDate *createdAt;
+@property NSArray *runningApps;
 
 @end

@@ -12,106 +12,81 @@
 
 @implementation ImageBrowserController
 
-- (id)initWithWindow:(NSWindow *)window
-{
+- (id)initWithWindow:(NSWindow *)window {
     self = [super initWithWindow:window];
     if (self) {
         // Initialization code here.
     }
-    
     return self;
 }
 
-- (void)windowDidBecomeKey:(NSNotification *)notification
-{
-    ProcessSerialNumber psn = { 0, kCurrentProcess };
-    TransformProcessType(&psn, kProcessTransformToForegroundApplication);
-    SetFrontProcess(&psn);
-}
-
-- (void)windowWillClose:(NSNotification *)notification
-{
+- (void)windowWillClose:(NSNotification *)notification {
     ProcessSerialNumber psn = { 0, kCurrentProcess };
     TransformProcessType(&psn, kProcessTransformToUIElementApplication);
 }
 
-- (void)awakeFromNib
-{
-    // create two arrays : the first one is our datasource representation,
-    // the second one are temporary imported images (for thread safeness)
-    
+NSString *kInfoFileName = @"vbackup-data.txt";
+- (NSString *) getPicsDirPath {
+    return [NSHomeDirectory() stringByAppendingPathComponent:  @"Pictures/VisualBackup-Test"];
+}
+
+- (void)awakeFromNib {
     _images = [[NSMutableArray alloc] init];
     _importedImages = [[NSMutableArray alloc] init];
 
-
-    //allow reordering, animations et set draggind destination delegate
     [_imageBrowser setAllowsReordering:YES];
     [_imageBrowser setAnimates:YES];
     [_imageBrowser setDraggingDestinationDelegate:self];
-    
-    _runningApps = [NSMutableDictionary dictionaryWithCapacity:0];
-    
-    NSString *picsDir = [NSHomeDirectory() stringByAppendingPathComponent:  @"Pictures/VisualBackup-Test"];
-    NSString *infoPath = [NSString stringWithFormat:@"%@/vbackup-data.txt", picsDir];
-    BOOL isFileExists = [[NSFileManager defaultManager] fileExistsAtPath:infoPath];
-    if(isFileExists) {
-        _runningApps = [NSKeyedUnarchiver unarchiveObjectWithFile:infoPath];
-    }
-
-    // load images on load
-    [self addImageButtonClicked:nil];
+    [self reloadScreenshotsFromDefaultStore];
 
     _screenshotsTaker = [NSTimer scheduledTimerWithTimeInterval:10.0f target:self selector:@selector(screensaverButtonClicked:) userInfo:self repeats:YES];
 }
 
-- (IBAction)addImageButtonClicked:(id)sender
-{
-    NSString *picsDir = [NSHomeDirectory() stringByAppendingPathComponent:  @"Pictures/VisualBackup-Test"];
+- (void)loadRunningAppsInfoData {
+    _runningApps = [NSMutableDictionary dictionaryWithCapacity:0];
+    NSString *infoPath = [NSString stringWithFormat:@"%@/%@", [self getPicsDirPath], kInfoFileName];
+    BOOL isFileExists = [[NSFileManager defaultManager] fileExistsAtPath:infoPath];
+    if(isFileExists) {
+        _runningApps = [NSKeyedUnarchiver unarchiveObjectWithFile:infoPath];
+    }
+}
+
+- (void)reloadScreenshotsFromDefaultStore {
+    NSString *picsDir = [self getPicsDirPath];
     NSArray *filepaths = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:picsDir error:nil];
     NSMutableArray *images = [NSMutableArray array];
 
     [_images removeAllObjects];
 
-    for (id each in filepaths)
-    {
+    for (id each in filepaths) {
         NSString *fullPath = [NSString stringWithFormat:@"%@/%@", picsDir, (NSString *)each];
         NSURL *url = [NSURL fileURLWithPath:fullPath];
-        if(url != nil)
-        {
+        if(url != nil) {
             [images addObject:url];
         }
     }
-    
-    NSString *infoPath = [NSString stringWithFormat:@"%@/vbackup-data.txt", picsDir];
-    _runningApps = [NSKeyedUnarchiver unarchiveObjectWithFile:infoPath];
+
+    [self loadRunningAppsInfoData];
 
     /* launch import in an independent thread */
     [NSThread detachNewThreadSelector:@selector(addImagesWithPaths:) toTarget:self withObject:images];
 }
 
 
-- (NSUInteger)numberOfItemsInImageBrowser:(IKImageBrowserView *)browser
-{
+- (NSUInteger)numberOfItemsInImageBrowser:(IKImageBrowserView *)browser {
     return [_images count];
 }
 
-- (id)imageBrowser:(IKImageBrowserView *)aBrowser itemAtIndex:(NSUInteger)index
-{
+- (id)imageBrowser:(IKImageBrowserView *)aBrowser itemAtIndex:(NSUInteger)index {
     return [_images objectAtIndex:index];
 }
 
 
-/* entry point for reloading image-browser's data and setNeedsDisplay */
-- (void)updateDatasource
-{
-    //-- update our datasource, add recently imported items
+- (void)updateDatasource {
     [_images addObjectsFromArray:_importedImages];
-	
-	//-- empty our temporary array
     [_importedImages removeAllObjects];
-    
-    //-- reload the image browser and set needs display
     [_imageBrowser reloadData];
+
     [_imageBrowser removeAllToolTips];
     for (int i=0; i<[_images count]; i++) {
         NSRect rect = [_imageBrowser itemFrameAtIndex:i];
@@ -122,43 +97,38 @@
 
 - (NSString*)view:(NSView *)view stringForToolTip:(NSToolTipTag)tag point:(NSPoint)point userData:(void *)data {
     ImageBrowserItem *itemObj = (__bridge ImageBrowserItem *)data;
-    
-    NSString *appsList = [[[itemObj getRunningApps] valueForKey:@"description"] componentsJoinedByString:@"\n"];
+
+    NSString *appsList = [[itemObj.runningApps valueForKey:@"description"] componentsJoinedByString:@"\n"];
     return appsList;
 }
 
-- (void)addAnImageWithPath:(NSString *)path creationDate:(NSDate *)createdAt andRunningApps:(NSArray *)apps
-{
+- (void)addAnImageWithPath:(NSString *)path creationDate:(NSDate *)createdAt andRunningApps:(NSArray *)apps {
     ImageBrowserItem *p;
 
-	/* add a path to our temporary array */
     p = [[ImageBrowserItem alloc] init];
-    [p setPath:path];
-    [p setCreatedAt:createdAt];
-    [p setRunningApps:apps];
+    p.path = path;
+    p.createdAt = createdAt;
+    p.runningApps = apps;
 
     [_importedImages addObject:p];
 }
 
 /* performed in an independant thread, parse all paths in "paths" and add these paths in our temporary array */
-- (void)addImagesWithPaths:(NSArray *)urls
-{
+- (void)addImagesWithPaths:(NSArray *)urls {
     NSArray *imageTypes = [NSImage imageTypes];
     NSString *resType;
     NSDate *createdAt;
 
-    for (id each in urls)
-    {
+    for (id each in urls) {
         NSURL *url = each;
         [url getResourceValue:&resType forKey:NSURLTypeIdentifierKey error:nil];
         if([imageTypes containsObject:resType]) {
-            [url getResourceValue:&createdAt forKey:NSURLCreationDateKey error:nil];
-            
             NSArray *apps = [_runningApps objectForKey:[url path]];
+            [url getResourceValue:&createdAt forKey:NSURLCreationDateKey error:nil];
             [self addAnImageWithPath:[url path] creationDate:createdAt andRunningApps:apps];
         }
     }
-    
+
 	/* update the datasource in the main thread */
     [self performSelectorOnMainThread:@selector(updateDatasource) withObject:nil waitUntilDone:YES];
 }
@@ -167,76 +137,63 @@ typedef struct {
     __unsafe_unretained NSMutableArray* outputArray;
 } ArrayApplierData;
 
-- (IBAction)screensaverButtonClicked:(id)sender
-{
+- (IBAction)screensaverButtonClicked:(id)sender {
     CGImageRef screenshot = CGWindowListCreateImage(CGRectInfinite, kCGWindowListOptionOnScreenOnly, kCGNullWindowID, kCGWindowImageDefault);
 
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd-HHmmss"];
     NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
 
-    NSString *picsDir = [NSHomeDirectory() stringByAppendingPathComponent:  @"Pictures/VisualBackup-Test"];
+    NSString *picsDir = [self getPicsDirPath];
     NSString *imgPath = [NSString stringWithFormat:@"%@/vbackup-%@.png", picsDir, dateString];
     CGImageWriteToFile(screenshot, imgPath);
-    
+
     CFArrayRef windowsList = CGWindowListCopyWindowInfo(kCGWindowListOptionOnScreenOnly, kCGNullWindowID);
     NSMutableArray * prunedWindowList = [NSMutableArray array];
 	ArrayApplierData data = {prunedWindowList};
-    
-    CFArrayApplyFunction(windowsList, CFRangeMake(0, CFArrayGetCount(windowsList)), &extractActiveProgramNames, &data);
 
-    if (_runningApps == nil)
-        _runningApps = [NSMutableDictionary dictionaryWithCapacity:0];
+    CFArrayApplyFunction(windowsList, CFRangeMake(0, CFArrayGetCount(windowsList)), &extractActiveProgramNames, &data);
 
     [_runningApps setObject:prunedWindowList forKey:imgPath];
 
-    NSString *infoPath = [NSString stringWithFormat:@"%@/vbackup-data.txt", picsDir];
+    NSString *infoPath = [NSString stringWithFormat:@"%@/%@", picsDir, kInfoFileName];
     [NSKeyedArchiver archiveRootObject:_runningApps toFile:infoPath];
-    
+
 	CFRelease(windowsList);
 
-    [self addImageButtonClicked:sender];
+    [self reloadScreenshotsFromDefaultStore];
     CGImageRelease(screenshot);
 }
 
-void extractActiveProgramNames(const void *inputDictionary, void *context);
-void extractActiveProgramNames(const void *inputDictionary, void *context)
-{
+void extractActiveProgramNames(const void *inputDictionary, void *context) {
     NSDictionary *entry = (__bridge NSDictionary*)inputDictionary;
 	ArrayApplierData *data = (ArrayApplierData*)context;
 
     int sharingState = [[entry objectForKey:(id)kCGWindowSharingState] intValue];
     int level = [[entry objectForKey:(id)kCGWindowLayer] intValue];
 
-	if((sharingState != kCGWindowSharingNone) && (level == 0))
-    {
+	if((sharingState != kCGWindowSharingNone) && (level == 0)) {
 		// Grab the application name, but since it's optional we need to check before we can use it.
 		NSString *applicationName = [entry objectForKey:(id)kCGWindowOwnerName];
 
-		if(applicationName != NULL)
-		{
-            if([data->outputArray containsObject:applicationName] == NO)
-            {
+		if(applicationName != NULL) {
+            if([data->outputArray containsObject:applicationName] == NO) {
                 [data->outputArray addObject:applicationName];
             }
 		}
 	}
 }
 
-
 void CGImageWriteToFile(CGImageRef image, NSString *path) {
     CFURLRef url = (__bridge CFURLRef)[NSURL fileURLWithPath:path];
-
     CGImageDestinationRef dest = CGImageDestinationCreateWithURL(url, kUTTypePNG, 1, nil);
-    
     CGImageDestinationAddImage(dest, image, NULL);
-    
+
     if (!CGImageDestinationFinalize(dest)) {
         NSLog(@"Failed to write image to %@", path);
     }
-    
+
     CFRelease(dest);
 }
-
 
 @end

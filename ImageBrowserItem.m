@@ -11,52 +11,16 @@
 
 @implementation ImageBrowserItem : NSObject
 
-
-- (NSString *) imageRepresentationType
-{
+- (NSString *) imageRepresentationType {
     return IKImageBrowserPathRepresentationType;
 }
 
-- (id) imageRepresentation
-{
+- (id) imageRepresentation {
     return _path;
 }
 
-- (NSString *) imageUID
-{
+- (NSString *) imageUID {
     return _path;
-}
-
-- (void)setPath:(NSString *)path
-{
-    if(_path != path)
-    {
-        _path = path;
-    }
-}
-
-- (NSString *)getPath
-{
-    return _path;
-}
-
-- (void)setCreatedAt:(NSDate *)createdAt
-{
-    _createdAt = createdAt;
-}
-
-- (void)setRunningApps:(NSArray *)runningApps
-{
-    if(_runningApps != nil) {
-        _runningApps = nil;
-    }
-    
-    _runningApps = [NSArray arrayWithArray:runningApps];
-}
-
-- (NSArray *)getRunningApps
-{
-    return _runningApps;
 }
 
 @end
