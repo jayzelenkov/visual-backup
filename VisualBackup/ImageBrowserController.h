@@ -12,6 +12,7 @@
 @interface ImageBrowserController : NSWindowController <NSWindowDelegate>
 {
     IBOutlet IKImageBrowserView *_imageBrowser;
+    IBOutlet IKImageBrowserView *_searchResultsBrowser;
 
     NSString *picsDir;
     
@@ -21,6 +22,8 @@
     NSTimer *_screenshotsTaker;
 }
 
+
+- (NSMutableDictionary*)runningApps;
 - (IBAction)screensaverButtonClicked:(id)sender;
 
 @end

@@ -39,6 +39,11 @@ NSString *kInfoFileName = @"vbackup-data.txt";
     _screenshotsTaker = [NSTimer scheduledTimerWithTimeInterval:10.0f target:self selector:@selector(screensaverButtonClicked:) userInfo:self repeats:YES];
 }
 
+- (NSDictionary*)runningApps
+{
+    return [NSDictionary dictionaryWithDictionary:_runningApps];
+}
+
 - (void)loadRunningAppsInfoData {
     _runningApps = [NSMutableDictionary dictionaryWithCapacity:0];
     NSString *infoPath = [NSString stringWithFormat:@"%@/%@", picsDir, kInfoFileName];

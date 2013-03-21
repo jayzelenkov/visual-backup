@@ -22,6 +22,7 @@
 		2AC7E7A4166DF27E0056E4DC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC7E784166DF27E0056E4DC /* Cocoa.framework */; };
 		2AC7E7AC166DF27E0056E4DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2AC7E7AA166DF27E0056E4DC /* InfoPlist.strings */; };
 		2AC7E7AF166DF27E0056E4DC /* VisualBackupTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7E7AE166DF27E0056E4DC /* VisualBackupTests.m */; };
+		2ADFA37016C1D80100E307A8 /* SearchResultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADFA36F16C1D80100E307A8 /* SearchResultsController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,8 +60,10 @@
 		2AC7E7A2166DF27E0056E4DC /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		2AC7E7A9166DF27E0056E4DC /* VisualBackupTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VisualBackupTests-Info.plist"; sourceTree = "<group>"; };
 		2AC7E7AB166DF27E0056E4DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		2AC7E7AD166DF27E0056E4DC /* VisualBackupTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VisualBackupTests.h; sourceTree = "<group>"; };
+		2AC7E7AD166DF27E0056E4DC /* VisualBackupTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VisualBackupTests.h; path = VisualBackupTests/VisualBackupTests.h; sourceTree = SOURCE_ROOT; };
 		2AC7E7AE166DF27E0056E4DC /* VisualBackupTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VisualBackupTests.m; sourceTree = "<group>"; };
+		2ADFA36E16C1D80100E307A8 /* SearchResultsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsController.h; sourceTree = "<group>"; };
+		2ADFA36F16C1D80100E307A8 /* SearchResultsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +140,8 @@
 				2AC7E799166DF27E0056E4DC /* MainMenu.xib */,
 				2A65BF591688AC2E001A5CFD /* ImageBrowserController.h */,
 				2A65BF5A1688AC2E001A5CFD /* ImageBrowserController.m */,
+				2ADFA36E16C1D80100E307A8 /* SearchResultsController.h */,
+				2ADFA36F16C1D80100E307A8 /* SearchResultsController.m */,
 				2AB0116916B9C71500B5952C /* ImageBrowserItem.h */,
 				2AB0116A16B9C71500B5952C /* ImageBrowserItem.m */,
 				2AC7E78B166DF27E0056E4DC /* Supporting Files */,
@@ -150,6 +155,7 @@
 				2AC7E78C166DF27E0056E4DC /* VisualBackup-Info.plist */,
 				2AC7E78D166DF27E0056E4DC /* InfoPlist.strings */,
 				2AC7E790166DF27E0056E4DC /* main.m */,
+				2AC7E7AD166DF27E0056E4DC /* VisualBackupTests.h */,
 				2AC7E792166DF27E0056E4DC /* VisualBackup-Prefix.pch */,
 				2AC7E793166DF27E0056E4DC /* Credits.rtf */,
 			);
@@ -159,7 +165,6 @@
 		2AC7E7A7166DF27E0056E4DC /* VisualBackupTests */ = {
 			isa = PBXGroup;
 			children = (
-				2AC7E7AD166DF27E0056E4DC /* VisualBackupTests.h */,
 				2AC7E7AE166DF27E0056E4DC /* VisualBackupTests.m */,
 				2AC7E7A8166DF27E0056E4DC /* Supporting Files */,
 			);
@@ -287,6 +292,7 @@
 				2AC7E798166DF27E0056E4DC /* AppDelegate.m in Sources */,
 				2A65BF5C1688AC2E001A5CFD /* ImageBrowserController.m in Sources */,
 				2AB0116B16B9C71500B5952C /* ImageBrowserItem.m in Sources */,
+				2ADFA37016C1D80100E307A8 /* SearchResultsController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
