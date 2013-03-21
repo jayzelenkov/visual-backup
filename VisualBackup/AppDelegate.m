@@ -12,22 +12,22 @@
 
 -(void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    [self bringToFront];
+
 }
 
 -(void) awakeFromNib {
     self.statusBar = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
 
-    self.statusBar.title = @"VBackup";
+    self.statusBar.title = @"vb";
     self.statusBar.menu = self.statusMenu;
     self.statusBar.highlightMode = YES;
 }
 
 -(IBAction)showWindow:(id)sender {
+    [self bringToFront];
+
     if(! [_window isVisible] )
         [_window makeKeyAndOrderFront:sender];
-
-    [self bringToFront];
 }
 
 -(void)bringToFront {
