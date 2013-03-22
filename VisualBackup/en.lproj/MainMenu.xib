@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12C3006</string>
+		<string key="IBDocument.SystemVersion">12D78</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1187.34</string>
-		<string key="IBDocument.HIToolboxVersion">625.00</string>
+		<string key="IBDocument.AppKitVersion">1187.37</string>
+		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">3084</string>
@@ -1622,7 +1622,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA</b
 									<array class="NSMutableArray" key="NSSubviews">
 										<object class="NSView" id="378602416">
 											<reference key="NSNextResponder" ref="802495222"/>
-											<int key="NSvFlags">-2147483374</int>
+											<int key="NSvFlags">274</int>
 											<array class="NSMutableArray" key="NSSubviews"/>
 											<string key="NSFrameSize">{650, 397}</string>
 											<reference key="NSSuperview" ref="802495222"/>
@@ -4791,7 +4791,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA</b
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">SearchResultsController</string>
-					<string key="superclassName">NSWindowController</string>
+					<string key="superclassName">NSObject</string>
 					<object class="NSMutableDictionary" key="actions">
 						<string key="NS.key.0">toggleButtonClicked:</string>
 						<string key="NS.object.0">id</string>

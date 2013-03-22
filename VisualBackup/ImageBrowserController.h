@@ -15,7 +15,7 @@
     IBOutlet IKImageBrowserView *_searchResultsBrowser;
 
     NSString *picsDir;
-    
+
     NSMutableArray *_images;
     NSMutableArray *_importedImages;
     NSMutableDictionary *_runningApps;
@@ -24,6 +24,7 @@
 
 
 - (NSMutableDictionary*)runningApps;
+- (NSArray*)images;
 - (IBAction)screensaverButtonClicked:(id)sender;
 
 @end

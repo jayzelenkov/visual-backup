@@ -34,6 +34,12 @@ NSString *kInfoFileName = @"vbackup-data.txt";
     [_imageBrowser setAllowsReordering:YES];
     [_imageBrowser setAnimates:YES];
     [_imageBrowser setDraggingDestinationDelegate:self];
+
+    [_searchResultsBrowser setAllowsReordering:YES];
+    [_searchResultsBrowser setAnimates:YES];
+    [_searchResultsBrowser setDraggingDestinationDelegate:self];
+    [_searchResultsBrowser reloadData];
+
     [self reloadScreenshotsFromDefaultStore];
 
     _screenshotsTaker = [NSTimer scheduledTimerWithTimeInterval:10.0f target:self selector:@selector(screensaverButtonClicked:) userInfo:self repeats:YES];
@@ -42,6 +48,11 @@ NSString *kInfoFileName = @"vbackup-data.txt";
 - (NSDictionary*)runningApps
 {
     return [NSDictionary dictionaryWithDictionary:_runningApps];
+}
+
+- (NSArray*)images
+{
+    return [NSArray arrayWithArray:_images];
 }
 
 - (void)loadRunningAppsInfoData {

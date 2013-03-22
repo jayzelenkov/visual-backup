@@ -8,6 +8,7 @@
 
 #import "SearchResultsController.h"
 #import "ImageBrowserController.h"
+#import "ImageBrowserItem.h"
 
 @implementation SearchResultsController
 
@@ -118,7 +119,7 @@
 	{
         commandHandling = YES;
         if(commandSelector == @selector(insertNewline:)) {
-            [self searchScreensByName];
+            [self searchScreensByEnteredName];
         } else {
             [textView performSelector:commandSelector withObject:nil];
         }
@@ -132,8 +133,42 @@
 #pragma clang diagnostic pop
 
 
-- (void)searchScreensByName {
-    NSLog(@"seach by name!");
+- (void)searchScreensByEnteredName {
+    NSArray *allImages = [imageBrowserController images];
+    NSString *appName = [searchField stringValue];
+    NSMutableArray *matches = [NSMutableArray array];
+
+    for (ImageBrowserItem *currentScreen in allImages) {
+        NSArray *runningApps = [currentScreen runningApps];
+        if ([runningApps containsObject:appName]) {
+            [matches addObject:currentScreen];
+        }
+    }
+
+    _foundImages = matches;
+    [_searchResultsBrowser reloadData];
+    [self showSeachResults];
+//    [self toggleButtonClicked:nil];
+}
+
+-(void)showSeachResults {
+    [_imageBrowserScroller setHidden:YES];
+    [_searchResultsBrowserScroller setHidden:NO];
+}
+
+#pragma mark -
+#pragma mark - IKImageBrowserController Delegate Methods
+
+- (NSUInteger)numberOfItemsInImageBrowser:(IKImageBrowserView *)browser {
+    if (_foundImages == nil) {
+        return 0;
+    }
+
+    return [_foundImages count];
+}
+
+- (id)imageBrowser:(IKImageBrowserView *)aBrowser itemAtIndex:(NSUInteger)index {
+    return [_foundImages objectAtIndex:index];
 }
 
 @end

@@ -28,6 +28,7 @@
     BOOL commandHandling;
 }
 
+@property NSArray *foundImages;
 -(IBAction)toggleButtonClicked:(id)sender;
 
 @end
